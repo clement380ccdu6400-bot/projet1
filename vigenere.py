@@ -3,6 +3,25 @@ def entrer_mot():
     mot = input("Entrer le mot en MAJUSCULES : ")
     return mot
 
+def entrer_clef():
+    clef=input("entrer une clef: ")
+    return clef
+
+def separer_clef(clef):
+    clef_sepa=[]
+    for p in clef:
+        clef_sepa.append(p)
+    return clef_sepa
+
+def conv_clef(clef_sepa):
+    clef_conv=[]
+    for j in clef_sepa:
+        if j in alpha:
+            clef_conv.append(ord(j)-65)
+        else:
+            clef_conv.append(j)
+    return clef_conv
+
 def separer_mot(mot):
     mot_sepa = []
     for c in mot:
@@ -20,21 +39,13 @@ def cont_mot(mot_sepa,alpha):
             mot_conteur.append(a)
     return mot_conteur
 
-def ord_mot(mot_sepa,alpha):
-    mot_ord = []
-    for c in mot_sepa:
-        if c in alpha:
-            mot_ord.append(ord(c) - 65)
-        else:
-            mot_ord.append(c)
-    return mot_ord
 
-def conv_vigenere(mot_ord,mot_conteur):
+def conv_vigenere(mot_conteur,clef_conv):
     mot_conv = []
     cont=0
-    for x in mot_ord:
+    for x in mot_conteur:
         if isinstance(x,int):
-            x=alpha[(mot_conteur[cont%len(mot_conteur)]+x)%26]
+            x=alpha[(x+clef_conv[cont%len(clef_conv)])%26]
             cont=cont+1
             mot_conv.append(x)
         else:
@@ -51,12 +62,12 @@ def texte_final(mot_conv):
 
 #code principal
 mot = entrer_mot()
+clef=entrer_clef()
+clef_sepa=separer_clef(clef)
+clef_conv=conv_clef(clef_sepa)
 mot_sepa = separer_mot(mot)
 mot_conteur=cont_mot(mot_sepa,alpha)
-mot_ord = ord_mot(mot_sepa,alpha)
-mot_conv = conv_vigenere(mot_ord,mot_conteur)
+mot_conv = conv_vigenere(mot_conteur,clef_conv)
 texte_chiffre = texte_final(mot_conv)
 
 print("Texte chiffré :", texte_chiffre)
-
-
