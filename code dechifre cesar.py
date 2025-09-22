@@ -53,4 +53,3 @@ mot_conv = conv_cesar(mot_sepa,mot_conteur,clef)
 texte_dechiffre = texte_final(mot_conv)
 
 print("Texte dechiffré :", texte_dechiffre)
-
