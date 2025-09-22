@@ -48,7 +48,7 @@ def ord_mot(mot_sepa,alpha):
             mot_ord.append(c)
     return mot_ord
 
-def conv_vigenere(mot_ord,mot_conteur):
+def conv_vigenere(mot_ord,mot_conteur,clef_conv):
     mot_conv = []
     cont=0
     for x in mot_ord:
@@ -71,10 +71,12 @@ def texte_final(mot_conv):
 #code principal
 mot = entrer_mot()
 clef=entrer_clef()
+clef_sepa=separer_clef(clef)
+clef_conv=conv_clef(clef_sepa)
 mot_sepa = separer_mot(mot)
 mot_conteur=cont_mot(mot_sepa,alpha)
 mot_ord = ord_mot(mot_sepa,alpha)
-mot_conv = conv_vigenere(mot_ord,mot_conteur)
+mot_conv = conv_vigenere(mot_ord,mot_conteur,clef_conv)
 texte_chiffre = texte_final(mot_conv)
 
 print("Texte chiffré :", texte_chiffre)
