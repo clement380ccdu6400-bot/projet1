@@ -4,7 +4,7 @@ def entrer_mot():
     return mot
 
 def entrer_clef():
-    clef=input("entrer une clef")
+    clef=input("entrer une clef: ")
     return clef
 
 def separer_clef(clef):
@@ -12,10 +12,10 @@ def separer_clef(clef):
     for p in clef:
         clef_sepa.append(p)
     return clef_sepa
-    
+
 def conv_clef(clef_sepa):
     clef_conv=[]
-    for j in range(len(clef_sepa)):
+    for j in clef_sepa:
         if j in alpha:
             clef_conv.append(ord(j)-65)
         else:
@@ -48,12 +48,12 @@ def ord_mot(mot_sepa,alpha):
             mot_ord.append(c)
     return mot_ord
 
-def conv_vigenere(mot_ord,mot_conteur,clef_conv):
+def conv_vigenere(mot_conteur,clef_conv):
     mot_conv = []
     cont=0
-    for x in mot_ord:
+    for x in mot_conteur:
         if isinstance(x,int):
-            x=alpha[(mot_conteur[cont%len(mot_conteur)]+clef_conv[cont])%26]
+            x=alpha[(x+clef_conv[cont%len(clef_conv)])%26]
             cont=cont+1
             mot_conv.append(x)
         else:
@@ -76,8 +76,7 @@ clef_conv=conv_clef(clef_sepa)
 mot_sepa = separer_mot(mot)
 mot_conteur=cont_mot(mot_sepa,alpha)
 mot_ord = ord_mot(mot_sepa,alpha)
-mot_conv = conv_vigenere(mot_ord,mot_conteur,clef_conv)
+mot_conv = conv_vigenere(mot_conteur,clef_conv)
 texte_chiffre = texte_final(mot_conv)
 
 print("Texte chiffré :", texte_chiffre)
-
