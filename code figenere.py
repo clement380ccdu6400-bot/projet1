@@ -39,14 +39,6 @@ def cont_mot(mot_sepa,alpha):
             mot_conteur.append(a)
     return mot_conteur
 
-def ord_mot(mot_sepa,alpha):
-    mot_ord = []
-    for c in mot_sepa:
-        if c in alpha:
-            mot_ord.append(ord(c) - 65)
-        else:
-            mot_ord.append(c)
-    return mot_ord
 
 def conv_vigenere(mot_conteur,clef_conv):
     mot_conv = []
@@ -75,7 +67,6 @@ clef_sepa=separer_clef(clef)
 clef_conv=conv_clef(clef_sepa)
 mot_sepa = separer_mot(mot)
 mot_conteur=cont_mot(mot_sepa,alpha)
-mot_ord = ord_mot(mot_sepa,alpha)
 mot_conv = conv_vigenere(mot_conteur,clef_conv)
 texte_chiffre = texte_final(mot_conv)
 
